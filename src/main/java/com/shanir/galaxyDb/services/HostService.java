@@ -3,8 +3,8 @@ package com.shanir.galaxyDb.services;
 import com.shanir.galaxyDb.models.Host;
 import com.shanir.galaxyDb.repositories.HostRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 @Service
@@ -15,11 +15,11 @@ public class HostService {
     public Host getById(String hostName) {
         Optional<Host> returnValue =
                 this.hostRepository.findById(hostName);
+        return returnValue.isEmpty() ? null : returnValue.get();
+    }
 
-        if (returnValue.isEmpty())
-            return null;
-
-        return returnValue.get();
+    public Iterable<Host> findAll() {
+        return this.hostRepository.findAll();
     }
 
     public Host addHost(Host host) {
@@ -28,6 +28,5 @@ public class HostService {
 
     public void deleteByHost(String hostName) {
         this.hostRepository.deleteById(hostName);
-
     }
 }

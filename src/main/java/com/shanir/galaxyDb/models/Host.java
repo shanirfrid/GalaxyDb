@@ -1,17 +1,23 @@
 package com.shanir.galaxyDb.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 @Entity
+@Table(name="hosts")
+@NoArgsConstructor
 public class Host {
+    @Column(name = "hostname", nullable = false, length = 50)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     String hostName;
+
+    @Column(name = "iscritical", nullable = false, length = 2)
     boolean isCritical;
+
+    @Column(name = "stationid", nullable = false, length = 50)
     String stationId;
+
+    @Column(name = "stationname",nullable = false, length = 50)
     String stationName;
 
     public Host(String hostName, boolean isCritical, String stationId, String stationName) {
@@ -21,13 +27,12 @@ public class Host {
         this.stationName = stationName;
     }
 
-
     public void setHostName(String hostName) {
         this.hostName = hostName;
     }
 
-    public void setCritical(boolean critical) {
-        isCritical = critical;
+    public void setCritical(boolean isCritical) {
+        isCritical = isCritical;
     }
 
     public void setStationId(String stationId) {
@@ -42,7 +47,7 @@ public class Host {
         return hostName;
     }
 
-    public boolean isCritical() {
+    public boolean getIsCritical() {
         return isCritical;
     }
 
